@@ -1,0 +1,36 @@
+<template name="configureLoginServiceDialogForDnspod">
+  <p>
+    First, you'll need to get a DNSPod APP ID. Follow these steps:
+  </p>
+  <ol>
+    <li><p>Add a new APP</p>
+    <ul>
+       <li>接口：/Apps</li>
+       <li>方法：post</li>
+       <li>参数：<ul>
+          <li>appname : 应用名称</li>
+          <li>callback : 应用回调地址</li>
+          <li>appindex : 应用首页地址</li>
+       </ul>
+       </li>
+       <li>返回：<ul>
+          <li>app_key</li>
+          <li>app_secret</li>
+          <li>app_callback</li>
+          <li>app_name</li>
+          <li>app_index</li>
+       </ul>
+       </li>
+    </ul>
+    </li>
+    <li>
+      Set Authorized Redirect URIs to: <span class="url">{{siteUrl}}_oauth/google?close</span>
+    </li>
+    <li>
+      Set Authorized JavaScript Origins to: <span class="url">{{siteUrl}}</span>
+    </li>
+    <li>
+      Create client ID
+    </li>
+  </ol>
+</template>
