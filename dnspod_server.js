@@ -59,7 +59,7 @@
       }
     });
     var userInfoContent = JSON.parse(userInfoResult.content);
-    var user
+    var user;
     if (userInfoContent && userInfoContent.status && userInfoContent.status.code === "1") {
        user = userInfoContent.info.user;
     } else {

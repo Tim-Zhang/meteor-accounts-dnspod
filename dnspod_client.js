@@ -13,13 +13,7 @@
       return;
     }
 
-    var state = Meteor.uuid();
-
-    var scope = ['get_user_info'];
-    if (Accounts.dnspod._options && Accounts.dnspod._options.scope) {
-      scope = _.union(scope, Accounts.dnspod._options.scope);
-    }
-    var flatScope = _.map(scope, encodeURIComponent).join(',');
+    var state = Random.id();
 
     var loginUrl = 
           'https://www.dnspod.cn/OAuth/Authorize' + 
