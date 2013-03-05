@@ -1,5 +1,7 @@
 (function () {
   Meteor.loginWithDnspod = function (options, callback) {
+    console.log(options);
+    console.log(callback);
     if (!callback && typeof options === 'function') {
       callback = options;
       options = {};
@@ -13,13 +15,16 @@
       return;
     }
 
-    var state = Random.id();
+    var state = Meteor.uuid();
+    console.log(state);
 
     var loginUrl = 
           'https://www.dnspod.cn/OAuth/Authorize' + 
-          '?response_type=code' + 
-          '&client_id=' + config.clientId + 
-          '&redirect_uri=' + Meteor.absoluteUrl('_oauth/dnspod?close');
+          '?client_id=' + config.clientId + 
+          '&redirect_uri=' + Meteor.absoluteUrl('_oauth/dnspod?close=close') +
+          '&response_type=code'+
+          '&state=' + state;
+          ;
 
     Accounts.oauth.initiateLogin(state, loginUrl, callback);
   };

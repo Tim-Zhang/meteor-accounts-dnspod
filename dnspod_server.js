@@ -1,14 +1,9 @@
 (function () {
   Accounts.oauth.registerService('dnspod', 2, function (query) {
-    var config = Accounts.loginServiceConfiguration.findOne({
-      service: 'dnspod'
-    });
-    if (!config) {
-      throw new Accounts.ConfigError("DNSPod AuthService not configured");
-    }
+     console.log(query);
 
-    var accessToken = getAccessToken(config, query);
-    var identity = getIdentity(config, accessToken.accessToken);
+    var accessToken = getAccessToken(query);
+    var identity = getUserInfo(accessToken.accessToken);
     
     var returnVal = {
       serviceData: {
@@ -17,22 +12,28 @@
       },
       options: {
         profile: {
+          uid : identity.id,
           id : identity.id
         }
       }
     };
-    console.log(returnVal);
     return returnVal;
     
   });
 
-  var getAccessToken = function (config, query) {
+  var getAccessToken = function (query) {
+    var config = Accounts.loginServiceConfiguration.findOne({
+      service: 'dnspod'
+    });
+    if (!config) {
+      throw new Accounts.ConfigError("DNSPod AuthService not configured");
+    }
     var result = Meteor.http.post("https://www.dnspod.cn/OAuth/Access.Token", {
       params: {
         code: query.code,
         client_id: config.clientId,
         client_secret: config.secret,
-        redirect_uri: Meteor.absoluteUrl("_oauth/dnspod?close"),
+        redirect_uri: Meteor.absoluteUrl("_oauth/dnspod?close=close"),
         grant_type: 'authorization_code'
       }
     });
@@ -50,7 +51,7 @@
     };
   };
 
-  var getIdentity = function (config, accessToken) {
+  var getUserInfo = function (accessToken) {
 
     var userInfoResult = Meteor.http.post("https://dnsapi.cn/User.Detail", {
       params: {
