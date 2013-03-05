@@ -3,6 +3,6 @@
   "description": "Authentication package for DNSPod",
   "homepage": "https://github.com/zewenzhang/meteor-accounts-dnspod",
   "author": "Tim Zhang",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "git": "https://github.com/zewenzhang/meteor-accounts-dnspod.git"
 }

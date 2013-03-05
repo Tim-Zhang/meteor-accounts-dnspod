@@ -1,7 +1,5 @@
 (function () {
   Meteor.loginWithDnspod = function (options, callback) {
-    console.log(options);
-    console.log(callback);
     if (!callback && typeof options === 'function') {
       callback = options;
       options = {};
@@ -16,7 +14,6 @@
     }
 
     var state = Meteor.uuid();
-    console.log(state);
 
     var loginUrl = 
           'https://www.dnspod.cn/OAuth/Authorize' + 
