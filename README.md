@@ -12,8 +12,8 @@ Meteor OAuth 2.0 login service for DNSPod
 ### Usage
 
 1. `meteor add accounts-dnspod`
-2. post https://www.dnspod.cn/Apps with parameter appname,callback,appindex and make sure you have logined, then make sure you set up your config and secret correctly.
 3. simply add the `{{loginButtons}}` helper to an HTML file.
+2. post https://www.dnspod.cn/Apps with parameter appname,callback,appindex and make sure you have logined, then make sure you set up your config and secret correctly.
 
 ### Credits
 
