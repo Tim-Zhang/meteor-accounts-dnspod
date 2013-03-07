@@ -1,17 +1,17 @@
 (function () {
   Accounts.oauth.registerService('dnspod', 2, function (query) {
     var accessToken = getAccessToken(query);
-    var identity = getUserInfo(accessToken.accessToken);
+    var user = getUserInfo(accessToken.accessToken);
     
     var returnVal = {
       serviceData: {
-        id: identity.id,
+        id: user.id,
         accessToken: accessToken.accessToken,
       },
       options: {
         profile: {
-          id : identity.id,
-          name: identity.nick || identity.id
+          id : user.id,
+          name: user.real_name || user.nick || user.id
          
         }
       }
@@ -73,7 +73,7 @@
 
     return {
       id: user.id,
-      name: user.nick,
+      nick: user.nick,
       real_name: user.real_name
     };
   };
